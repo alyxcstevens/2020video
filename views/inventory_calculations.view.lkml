@@ -87,22 +87,17 @@ view: inventory_calculations {
         value: "yes"
       }
       sql: ${inventory_id} ;;
+      drill_fields: [inventory_id, inventory.store_id, film.title, category.name,
+        film.replacement_cost, film.rental_rate]
     }
 
     measure: count_of_inventory {
       type: count_distinct
       sql: ${inventory_id} ;;
+      drill_fields: [inventory_id, inventory.store_id, film.title, category.name,
+        film.replacement_cost, film.rental_rate]
+
     }
 
 
-
-    set: detail {
-      fields: [inventory_id
-        , inventory.store_id
-        , film.title
-        , category.name
-        , film.replacement_cost
-        , film.rental_rate
-      ]
-    }
     }
