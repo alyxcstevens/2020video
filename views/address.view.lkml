@@ -53,6 +53,11 @@ view: address {
     sql: ${TABLE}.postal_code ;;
   }
 
+  dimension: location {
+    type: zipcode
+    sql: ${postal_code} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [address_id, city.city_id, customer.count, staff.count, store.count]

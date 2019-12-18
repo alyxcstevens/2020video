@@ -11,13 +11,7 @@ datagroup: acs_vid_default_datagroup {
 persist_with: acs_vid_default_datagroup
 
 
-explore: payment {
-  join: rental {
-    type: left_outer
-    sql_on: ${payment.rental_id} = ${rental.rental_id} ;;
-    relationship: one_to_one
-  }
-}
+
 
 # explore: actor {}
 #
@@ -129,6 +123,18 @@ explore: film_category {
     sql_on: ${film.language_id} = ${language.language_id} ;;
     relationship: many_to_one
   }
+
+  join: inventory {
+    type: left_outer
+    sql_on: ${inventory.film_id} = ${film_category.film_id} ;;
+    relationship: one_to_one
+  }
+
+  join: inventory_calculations {
+    type: left_outer
+    sql_on: ${inventory.inventory_id} = ${inventory_calculations.inventory_id} ;;
+    relationship: one_to_one
+  }
 }
 
 # explore: film_list {}
@@ -200,6 +206,12 @@ explore: rental {
     type: left_outer
     sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
     relationship: many_to_one
+  }
+
+  join: inventory_calculations {
+    type: left_outer
+    sql_on: ${inventory.inventory_id} = ${inventory_calculations.inventory_id} ;;
+    relationship: one_to_one
   }
 
   join: customer {
@@ -320,69 +332,76 @@ explore: store {
 
 
 
+explore: payment {
+  join: customer {
+    type: left_outer
+    sql_on: ${payment.customer_id} = ${customer.customer_id} ;;
+    relationship: many_to_one
+  }
 
+  join: staff {
+    type: left_outer
+    sql_on: ${payment.staff_id} = ${staff.staff_id} ;;
+    relationship: many_to_one
+  }
 
-#
-# # =======================================
-#
-# # explore: payment {
-# #   join: customer {
-# #     type: left_outer
-# #     sql_on: ${payment.customer_id} = ${customer.customer_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: staff {
-# #     type: left_outer
-# #     sql_on: ${payment.staff_id} = ${staff.staff_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: rental {
-# #     type: left_outer
-# #     sql_on: ${payment.rental_id} = ${rental.rental_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: store {
-# #     type: left_outer
-# #     sql_on: ${customer.store_id} = ${store.store_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: address {
-# #     type: left_outer
-# #     sql_on: ${customer.address_id} = ${address.address_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: city {
-# #     type: left_outer
-# #     sql_on: ${address.city_id} = ${city.city_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-# #   join: country {
-# #     type: left_outer
-# #     sql_on: ${city.country_id} = ${country.country_id} ;;
-# #     relationship: many_to_one
-# #   }
-# #
-#   join: inventory {
-#     type: left_outer
-#     sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
-#     relationship: many_to_one
-#   }
-#
-#   join: film {
-#     type: left_outer
-#     sql_on: ${inventory.film_id} = ${film.film_id} ;;
-#     relationship: many_to_one
-#   }
-#
-#   join: language {
-#     type: left_outer
-#     sql_on: ${film.language_id} = ${language.language_id} ;;
-#     relationship: many_to_one
-#   }
-# }
+  join: rental {
+    type: left_outer
+    sql_on: ${payment.rental_id} = ${rental.rental_id} ;;
+    relationship: many_to_one
+  }
+
+  join: store {
+    type: left_outer
+    sql_on: ${customer.store_id} = ${store.store_id} ;;
+    relationship: many_to_one
+  }
+
+  join: address {
+    type: left_outer
+    sql_on: ${customer.address_id} = ${address.address_id} ;;
+    relationship: many_to_one
+  }
+
+  join: city {
+    type: left_outer
+    sql_on: ${address.city_id} = ${city.city_id} ;;
+    relationship: many_to_one
+  }
+
+  join: country {
+    type: left_outer
+    sql_on: ${city.country_id} = ${country.country_id} ;;
+    relationship: many_to_one
+  }
+
+  join: inventory {
+    type: left_outer
+    sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
+    relationship: many_to_one
+  }
+
+  join: film {
+    type: left_outer
+    sql_on: ${inventory.film_id} = ${film.film_id} ;;
+    relationship: many_to_one
+  }
+
+  join: language {
+    type: left_outer
+    sql_on: ${film.language_id} = ${language.language_id} ;;
+    relationship: many_to_one
+  }
+
+  join: film_list {
+    type: left_outer
+    sql_on: ${film.film_id} = ${film_list.fid} ;;
+    relationship:  one_to_one
+  }
+
+  join: inventory_calculations {
+    type: left_outer
+    sql_on: ${inventory.inventory_id} = ${inventory_calculations.inventory_id} ;;
+    relationship: one_to_one
+  }
+}

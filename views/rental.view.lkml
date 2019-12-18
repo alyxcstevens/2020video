@@ -43,7 +43,8 @@ view: rental {
       week,
       month,
       quarter,
-      year
+      year,
+      day_of_week
     ]
     sql: ${TABLE}.rental_date ;;
   }
@@ -66,6 +67,17 @@ view: rental {
     description: "Due Date for a Rental"
     type: time
     sql: date_add(${rental_date}, interval 7 day) ;;
+  }
+
+  dimension: is_rental_overdue {
+    type: yesno
+    sql: datediff(${return_date}, ${due_date_date}) > 0
+         OR (${return_date} IS NULL AND datediff(CURDATE(), ${due_date_date}) >0) ;;
+  }
+
+  dimension: is_movie_rented {
+    type: yesno
+    sql: ${inventory_calculations.currently_in_stock} = "no" ;;
   }
 
   dimension: staff_id {

@@ -19,6 +19,12 @@ view: payment {
     value_format_name: usd
   }
 
+  measure: average_amount {
+    type: average
+    sql: ${amount} ;;
+    value_format_name: usd
+  }
+
 
 
   dimension: customer_id {
