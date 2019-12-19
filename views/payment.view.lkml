@@ -11,12 +11,14 @@ view: payment {
   dimension: amount {
     type: number
     sql: ${TABLE}.amount ;;
+    drill_fields: [detail*]
   }
 
   measure: total_amount {
     type: sum
     sql: ${amount} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
 
 
@@ -24,6 +26,7 @@ view: payment {
     type: average
     sql: ${amount} ;;
     value_format_name: usd
+    drill_fields: [detail*]
   }
 
 
@@ -83,13 +86,10 @@ view: payment {
   set: detail {
     fields: [
       payment_id,
+      amount,
       customer.customer_id,
-      customer.first_name,
-      customer.last_name,
-      staff.staff_id,
-      staff.first_name,
-      staff.last_name,
-      staff.username,
+      customer.full_name,
+      film.title,
       rental.rental_id
     ]
   }
