@@ -56,6 +56,30 @@ explore: customer {
     relationship: many_to_one
   }
 
+  join: customer_calculations {
+    type: left_outer
+    sql_on: ${customer.customer_id} = ${customer_calculations.customer_id} ;;
+    relationship: one_to_one
+  }
+
+  join: rental {
+    type: left_outer
+    sql_on: ${rental.customer_id} = ${customer.customer_id} ;;
+    relationship: many_to_one
+  }
+
+  join: inventory {
+    type: left_outer
+    sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
+    relationship: many_to_one
+  }
+
+  join: inventory_calculations {
+    type: left_outer
+    sql_on: ${inventory.inventory_id} = ${inventory_calculations.inventory_id} ;;
+    relationship: one_to_one
+  }
+
   join: address {
     type: left_outer
     sql_on: ${customer.address_id} = ${address.address_id} ;;
@@ -73,6 +97,7 @@ explore: customer {
     sql_on: ${city.country_id} = ${country.country_id} ;;
     relationship: many_to_one
   }
+
 }
 
 # explore: customer_list {}

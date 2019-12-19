@@ -19,6 +19,7 @@ view: payment {
     value_format_name: usd
   }
 
+
   measure: average_amount {
     type: average
     sql: ${amount} ;;

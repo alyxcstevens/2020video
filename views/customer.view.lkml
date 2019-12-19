@@ -48,6 +48,11 @@ view: customer {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: full_name {
+    type: string
+    sql: CONCAT(${last_name}, ', ', ${first_name}) ;;
+  }
+
   dimension_group: last_update {
     type: time
     timeframes: [
@@ -63,7 +68,7 @@ view: customer {
   }
 
   dimension: store_id {
-    type: yesno
+    type: number
     # hidden: yes
     sql: ${TABLE}.store_id ;;
   }
