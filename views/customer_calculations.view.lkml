@@ -60,11 +60,11 @@ view: customer_calculations {
     sql: ${lifetime_value} ;;
   }
 
-  dimension: months_since_first_rental {
-    description: "Number of months since a customer's first rental"
-    type: number
-    sql: TIMESTAMPDIFF(month, ${first_rental_date}, ${rental.rental_date}) ;;
-  }
+#   dimension: months_since_first_rental {
+#     description: "Number of months since a customer's first rental"
+#     type: number
+#     sql: TIMESTAMPDIFF(month, ${first_rental_date}, ${rental.rental_date}) ;;
+#   }
 
 #   dimension: is_within_30_days {
 #     hidden: yes
