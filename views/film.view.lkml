@@ -88,7 +88,7 @@ view: film {
 
     link: {
       label: "Film Lookup Dashboard"
-      url: "/dashboards/761?FIlm%20Title={{ value | encode_uri }}"
+      url: "/dashboards/761?FIlm%20Title={{ value }}"
       icon_url: "https://cdn3.iconfinder.com/data/icons/video-5/24/VHS-Cassette-512.png"
     }
   }
