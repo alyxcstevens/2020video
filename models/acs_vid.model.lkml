@@ -50,6 +50,13 @@ persist_with: acs_vid_default_datagroup
 # explore: country {}
 
 explore: customer {
+
+  access_filter: {
+    user_attribute: customer_name
+    field: full_name
+  }
+
+
   join: store {
     type: left_outer
     sql_on: ${customer.store_id} = ${store.store_id} ;;
